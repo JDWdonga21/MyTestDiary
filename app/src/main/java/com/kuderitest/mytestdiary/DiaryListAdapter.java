@@ -116,7 +116,12 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
                                         diaryDetailIntent.putExtra("diaryfModel", diaryModel);
                                         diaryDetailIntent.putExtra("mode", "modify"); //수정하기 모드
                                         mContext.startActivity(diaryDetailIntent);
-                                    }else {
+                                    }else if(position == 1){
+
+                                        mListDiary.add(diaryModel);
+                                        notifyItemChanged(currentPosition);
+                                    }
+                                    else {
                                         mListDiary.remove(currentPosition);
                                         notifyItemRemoved(currentPosition);
                                     }

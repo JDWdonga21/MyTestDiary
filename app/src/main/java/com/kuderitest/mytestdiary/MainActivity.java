@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         mLstDiary.add(item);
 
         DiaryModel item2 = new DiaryModel();
-        item2.setId(0);
+        item2.setId(1);
         item2.setTitle("제목입니다.2");
         item2.setContent("내용입니다.2");
         item2.setUserDate("2022/12/06 화요일");
