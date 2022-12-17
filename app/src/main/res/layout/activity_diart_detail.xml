@@ -114,6 +114,22 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:textColor="@color/black"/>
+        <!-- RADIO BUTTON GROUP -->
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:background="#504f4f"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:button="@null"
+                />
+
+        </RadioGroup>
     </LinearLayout>
 
 
