@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -43,8 +44,9 @@ public class DiartDetailActivity extends AppCompatActivity implements View.OnCli
         iv_check.setOnClickListener(this); //클릭 기능 부여
 
         // 기본으로 설정된 날짜의 값을 지정
-        String defaultDate = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREAN).format(new Date());
-        // 설명 : 이후 강의에서 이어서
+        mSelectedUserDate = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREAN).format(new Date());
+        // 설명 : SimpleDateFormat 간단한 날짜 포멧 설정, format(new Date())_현 디바이스 기준의 시간, 날짜 가져옴
+        mTvDate.setText(mSelectedUserDate);
     }
 
     @Override
@@ -53,9 +55,38 @@ public class DiartDetailActivity extends AppCompatActivity implements View.OnCli
         switch (view.getId()){
             case R.id.iv_back:
                 //뒤로가기
+                finish();
                 break;
             case R.id.iv_check:
                 //작성 완료
+                // 라디오 버튼 선택 값 가져오기
+                mSelectedWeatherType = mRgWeather.indexOfChild(findViewById(mRgWeather.getCheckedRadioButtonId()));
+                // 입력필드에 값 모두 입력되었는지 체크
+                if(mEtTitle.getText().length() == 0){
+                    //에러
+                    Toast.makeText(this, "제목이 입력되지 않았습니다.", Toast.LENGTH_SHORT).show();
+                    return; //아래 로직을 실행하지 않고 돌아감
+                }
+                if(mEtContent.getText().length() <= 5){
+                    Toast.makeText(this, "입력된 내용이 너무 적습니다.", Toast.LENGTH_SHORT).show();
+                    return; //아래 로직을 실행하지 않고 돌아감
+                }
+                if(mSelectedWeatherType == -1){
+                    //에러
+                    Toast.makeText(this, "날짜를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show();
+                    return; //아래 로직을 실행하지 않고 돌아감
+                }
+                // 데이터 저장
+                String title = mEtTitle.getText().toString();       //제목
+                String content = mEtContent.getText().toString();   //내용
+                String userDate = mSelectedUserDate;                // 사용자가 선택한 일시
+
+                String WriteDate = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.KOREAN).format(new Date());
+
+                //데이터 베이스에 저장 로직
+
+
+                finish();
                 break;
 
             case R.id.tv_date:
