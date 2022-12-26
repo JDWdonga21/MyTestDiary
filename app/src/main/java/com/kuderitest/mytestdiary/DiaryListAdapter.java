@@ -89,7 +89,7 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
                     //현재 클릭된 리스트 아이템 정보를 가지는 변수
                     DiaryModel diaryModel = mListDiary.get(currentPosition);
                     //화면 이동 및 다이어리 데이터 다음 엑티비티로 전달
-                    Intent diaryDetailIntent = new Intent(mContext, DiartDetailActivity.class);
+                    Intent diaryDetailIntent = new Intent(mContext, DiaryDetailActivity.class);
                     diaryDetailIntent.putExtra("diaryfModel", diaryModel);
                     diaryDetailIntent.putExtra("mode", "detail"); //상세보기 모드
                     mContext.startActivity(diaryDetailIntent);
@@ -112,7 +112,7 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int position) {
                                     if(position == 0){
-                                        Intent diaryDetailIntent = new Intent(mContext, DiartDetailActivity.class);
+                                        Intent diaryDetailIntent = new Intent(mContext, DiaryDetailActivity.class);
                                         diaryDetailIntent.putExtra("diaryfModel", diaryModel);
                                         diaryDetailIntent.putExtra("mode", "modify"); //수정하기 모드
                                         mContext.startActivity(diaryDetailIntent);

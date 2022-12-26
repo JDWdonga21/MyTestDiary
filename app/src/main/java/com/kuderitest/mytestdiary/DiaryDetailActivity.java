@@ -2,8 +2,10 @@ package com.kuderitest.mytestdiary;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -11,10 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class DiartDetailActivity extends AppCompatActivity implements View.OnClickListener{
+public class DiaryDetailActivity extends AppCompatActivity implements View.OnClickListener{
 
     private TextView mTvDate; // 일시 설정 텍스트
     private EditText mEtTitle, mEtContent; //일기 제목, 일기 내용
@@ -73,7 +76,7 @@ public class DiartDetailActivity extends AppCompatActivity implements View.OnCli
                 }
                 if(mSelectedWeatherType == -1){
                     //에러
-                    Toast.makeText(this, "날짜를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "날씨를 선택하지 않았습니다.", Toast.LENGTH_SHORT).show();
                     return; //아래 로직을 실행하지 않고 돌아감
                 }
                 // 데이터 저장
@@ -91,6 +94,23 @@ public class DiartDetailActivity extends AppCompatActivity implements View.OnCli
 
             case R.id.tv_date:
                 // 일시 작성 텍스트
+
+                // 달력을 띄워서 사용자에게 일시를 입력 받는다.
+                Calendar calendar = Calendar.getInstance();
+                DatePickerDialog dialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                        // 달력에 선택 된 (년, 월, 일)을 가지고 와서 다시 캘린더 함수에 넣어줘서 사용자가 선택한 요일을 알아낸다.
+                        Calendar innerCal = Calendar.getInstance();
+                        innerCal.set(Calendar.YEAR, year);
+                        innerCal.set(Calendar.MONTH, month);
+                        innerCal.set(Calendar.DATE, day);
+
+                        mSelectedUserDate = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREAN).format(innerCal.getTime());
+                        mTvDate.setText(mSelectedUserDate);
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DATE));
+                dialog.show(); //다이얼로그 (팝업) 활성화
                 break;
         }
     }

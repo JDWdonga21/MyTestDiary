@@ -3,6 +3,7 @@ package com.kuderitest.mytestdiary;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -52,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //작성하기 버튼 클릭시 호출되는 곳
+                Intent intent = new Intent(MainActivity.this, DiaryDetailActivity.class);
+                startActivity(intent);
 
             }
         });
