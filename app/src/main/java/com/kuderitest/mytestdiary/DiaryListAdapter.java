@@ -109,7 +109,7 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
                     //현재 클릭된 리스트 아이템 정보를 가지는 변수
                     DiaryModel diaryModel = mListDiary.get(currentPosition);
                     // 버튼 선택지 배열
-                    String[] strChiceArray = {"수정하기", "복사하기", "삭제하기"};
+                    String[] strChiceArray = {"수정하기", "삭제하기"};
                     // 팝업화면 표시
                     new AlertDialog.Builder(mContext)
                             .setTitle("원하시는 동작을 선택하세요.")
@@ -122,10 +122,6 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
                                         diaryDetailIntent.putExtra("diaryModel", diaryModel);
                                         diaryDetailIntent.putExtra("mode", "modify"); //수정하기 모드
                                         mContext.startActivity(diaryDetailIntent);
-                                    }else if(position == 1){
-                                        //복사하기
-                                        mListDiary.add(diaryModel);
-                                        notifyItemChanged(currentPosition);
                                     }
                                     else {
                                         //삭제하기
@@ -143,7 +139,9 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
             });
         }
     }
-    public void setSampleList(ArrayList<DiaryModel> lstDiary){
+    public void setListInit(ArrayList<DiaryModel> lstDiary){
+        // 데이터 리스트 업데이트
         mListDiary = lstDiary;
+        notifyDataSetChanged(); //리스트 뷰 새로고침
     }
 }
