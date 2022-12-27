@@ -22,11 +22,16 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
     // 컨텍스트 : 엑티비티나 화면 단위에서 모든 데이터를 가진 것, DiaryListAdapter가 화면이 아니라서
     // 컨텍스트가 없어서 화면 정보를 받기 위해서 정의해둠
     Context mContext;
+
+    //데이터 베이스 헬퍼 클래스
+    DatabaseHelper mDatabaseHelper;
+
     @NonNull
     @Override
     public DiaryListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // 아이템 뷰가 최초로 생성이 될 때 호출되는 곳
         mContext = parent.getContext();
+        mDatabaseHelper = new DatabaseHelper(mContext);
         View holder = LayoutInflater.from(mContext).inflate(R.layout.list_item_diary, parent, false);
         return new ViewHolder(holder);
     }
@@ -90,7 +95,7 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
                     DiaryModel diaryModel = mListDiary.get(currentPosition);
                     //화면 이동 및 다이어리 데이터 다음 엑티비티로 전달
                     Intent diaryDetailIntent = new Intent(mContext, DiaryDetailActivity.class);
-                    diaryDetailIntent.putExtra("diaryfModel", diaryModel);
+                    diaryDetailIntent.putExtra("diaryModel", diaryModel);
                     diaryDetailIntent.putExtra("mode", "detail"); //상세보기 모드
                     mContext.startActivity(diaryDetailIntent);
                 }
@@ -112,18 +117,24 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int position) {
                                     if(position == 0){
+                                        // 수정하기
                                         Intent diaryDetailIntent = new Intent(mContext, DiaryDetailActivity.class);
-                                        diaryDetailIntent.putExtra("diaryfModel", diaryModel);
+                                        diaryDetailIntent.putExtra("diaryModel", diaryModel);
                                         diaryDetailIntent.putExtra("mode", "modify"); //수정하기 모드
                                         mContext.startActivity(diaryDetailIntent);
                                     }else if(position == 1){
-
+                                        //복사하기
                                         mListDiary.add(diaryModel);
                                         notifyItemChanged(currentPosition);
                                     }
                                     else {
+                                        //삭제하기
+                                        // DB 삭제
+                                        mDatabaseHelper.setDeleteDiaryList(diaryModel.getWriteDate());
+                                        // UI 삭제
                                         mListDiary.remove(currentPosition);
                                         notifyItemRemoved(currentPosition);
+
                                     }
                                 }
                             }).show();

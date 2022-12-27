@@ -3,6 +3,7 @@ package com.kuderitest.mytestdiary;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.radiobutton.MaterialRadioButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -55,6 +58,23 @@ public class DiaryDetailActivity extends AppCompatActivity implements View.OnCli
         mSelectedUserDate = new SimpleDateFormat("yyyy/MM/dd E요일", Locale.KOREAN).format(new Date());
         // 설명 : SimpleDateFormat 간단한 날짜 포멧 설정, format(new Date())_현 디바이스 기준의 시간, 날짜 가져옴
         mTvDate.setText(mSelectedUserDate);
+
+        // 이전 엑티비티로부터 값을 전달 받기
+        Intent intent = getIntent();
+        if(intent.getExtras() != null){
+            //intent putExtra 했던 데이터가 존재한다면 내부를 수행, (캐스팅 작업)
+            DiaryModel diaryModel = (DiaryModel) intent.getSerializableExtra("diaryModel");
+            mDetailMode = intent.getStringExtra("mode");
+            mBeforeDate = diaryModel.getWriteDate(); // 계시글 database update 쿼리문 처리를 위해서 여기서 받아둠
+
+            // 넘겨받은 값을 활용해서 각 필드들에 설정해주기
+            mEtTitle.setText(diaryModel.getTitle());
+            mEtContent.setText(diaryModel.getContent());
+            int weatherType = diaryModel.getWeatherType();
+            ((MaterialRadioButton)mRgWeather.getChildAt(weatherType)).setChecked(true);
+            mTvDate.setText(diaryModel.getUserDate());
+
+        }
     }
 
     @Override

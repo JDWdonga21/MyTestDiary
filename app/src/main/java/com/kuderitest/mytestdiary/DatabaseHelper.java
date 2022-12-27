@@ -37,7 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) { onCreate(db); }
 
     /**
-     * 다이어리 작성 데이터를 DB에 저장한다.(INSERT)
+     * 다이어리 작성 데이터를 DB에 저장한다.(INSERT) - create
      */
     public void setInsertDiaryList(String _title, String _content, int _weatherType, String _userDate, String _writeDate) {
         SQLiteDatabase db = getWritableDatabase();
@@ -45,4 +45,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "VALUES ('" + _title + "','" + _content + "','" + _weatherType + "','" + _userDate + "','" + _writeDate + "')");
 
     }
+    /**
+     * 기존 작성 데이터를 수정한다. (UPDATE)
+     */
+    public void setUpdateDiaryList(String _title, String _content, int _weatherType, String _userDate, String _writeDate, String _beforeDate) {
+        // _beforeDate : KEY 값
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE DiaryInfo SET title = '"+ _title +"', content = '"+ _content +"', weatherType = '"+ _weatherType +"', userDate = '"+ _userDate +"', writeDate '"+ _writeDate +"' WHERE writeDate = '"+ _beforeDate + "' ");
+    }
+    /**
+     * 기존 작성 데이터를 삭제한다. (DELETE)
+     */
+    public void setDeleteDiaryList(String _writeDate){
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM DiaryInfo WHERE writeDate = '"+ _writeDate +"'");
+    }
+
 }

@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
         item.setId(0);
         item.setTitle("제목입니다.");
         item.setContent("내용입니다.");
-        item.setUserDate("2022/12/07 수요일");
-        item.setWriteDate("2022/12/07 수요일");
+        item.setUserDate("2022/12/03 mon");
+        item.setWriteDate("2022/12/03 mon");
         item.setWeatherType(0);
         mLstDiary.add(item);
 
@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         item2.setId(1);
         item2.setTitle("제목입니다.2");
         item2.setContent("내용입니다.2");
-        item2.setUserDate("2022/12/06 화요일");
-        item2.setWriteDate("2022/12/06 화요일");
+        item2.setUserDate("2022/12/06 Tue");
+        item2.setWriteDate("2022/12/06 Tue");
         item2.setWeatherType(1);
         mLstDiary.add(item2);
 
