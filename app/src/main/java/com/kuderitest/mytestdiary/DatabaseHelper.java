@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "MyDiart.db";
     private static final int DB_VERSION = 1;
 
-    // 생성자(constructor)
+    //생성자 (constructor)
     public DatabaseHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
