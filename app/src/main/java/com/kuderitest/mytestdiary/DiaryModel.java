@@ -10,7 +10,7 @@ public class DiaryModel implements Serializable {
     int id; //계시물의 고유 아이디
     String title; //계시물의 제목
     String content; //계시물의 내용
-    int weatherType; //날씨 타입 0: 맑음, 1: 흐림enlroa, 2: 흐림, 3: 매우흐림, 4: 비, 5: 눈
+    int weatherType; //날씨 타입 0: 맑음, 1: 흐림뒤 맑음, 2: 흐림, 3: 매우흐림, 4: 비, 5: 눈
     String userDate;
     String writeDate;
 

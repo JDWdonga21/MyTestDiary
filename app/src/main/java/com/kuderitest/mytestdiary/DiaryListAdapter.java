@@ -48,14 +48,22 @@ public class DiaryListAdapter extends RecyclerView.Adapter<DiaryListAdapter.View
                 holder.iv_weather.setImageResource(R.drawable.img_sun);
                 break;
             case 1:
+                //흐림뒤 맑음
+                holder.iv_weather.setImageResource(R.drawable.img_cloudy);
+                break;
+            case 2:
                 //흐림
                 holder.iv_weather.setImageResource(R.drawable.img_cloud);
                 break;
-            case 2:
+            case 3:
+                //매우흐림
+                holder.iv_weather.setImageResource(R.drawable.img_bad_cloud);
+                break;
+            case 4:
                 //비
                 holder.iv_weather.setImageResource(R.drawable.img_rainy);
                 break;
-            case 3:
+            case 5:
                 //눈
                 holder.iv_weather.setImageResource(R.drawable.img_snowy);
                 break;
