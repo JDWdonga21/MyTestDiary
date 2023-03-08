@@ -183,23 +183,28 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:textColor="@color/black"/>
-        <EditText
-            android:id="@+id/et_content"
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="top|left"
-            android:hint="내용을 입력해주세요."
-            android:inputType="textMultiLine"
-            android:singleLine="false"
-            android:lines="15"
-            android:scrollbars="horizontal"
-            android:scrollHorizontally="true"
-            android:overScrollMode="always"
-            android:textSize="14sp"
-            android:textColor="@color/black"
-            android:layout_marginTop="8dp"
-            android:padding="8dp"
-            android:background="@drawable/shape_input_field"/>
+            android:background="@drawable/shape_input_field">
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|left"
+                android:hint="내용을 입력해주세요."
+                android:inputType="textMultiLine"
+                android:singleLine="false"
+                android:lines="15"
+                android:scrollbars="horizontal"
+                android:scrollHorizontally="true"
+                android:overScrollMode="always"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:layout_marginTop="0dp"
+                android:padding="8dp"
+                android:background="@null"/>
+        </ScrollView>
     </LinearLayout>
 
 
